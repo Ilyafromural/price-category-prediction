@@ -1,0 +1,46 @@
+1. Перейти в терминал в папке проекта и вызвать команду uvicorn main:app --reload. Если не сработает, тогда python -m uvicorn main:app --reload
+2. Запустить Postman (Desktop version).
+3. Выполнить запрос статуса. GET/status — возвращает строку 'I’m OK'.
+Выбрать тип запроса GET, в адресной строке ввести status.    
+Нажать SEND, получить результат.
+4. Выполнить запрос версии. GET/version — возвращает словарь, содержащий информацию о модели (название модели, имя автора, версия, дата создания, тип решающего алгоритма и точность, достигнутая на кросс-валидации), в формате:
+{
+                 'name': 'Price category prediction model',
+                 'author': 'Ilya Pachin',
+                 'version': 1,
+                 'date': datetime.datetime.now(),
+                 'type': type(best_pipe.named_steps["classifier"]).__name__,
+                 'accuracy': best_score
+            }
+Выбрать тип запроса GET, в адресной строке ввести version.    
+Нажать SEND, получить результат.
+5. Выполнить запрос предсказания модели.
+POST/predict — принимает JSON-объект, содержащий информацию об автомобиле и возвращающий соответствующее предсказание модели.
+Выбрать тип запроса POST, в адресной строке ввести predict.
+Во вкладке body выбрать raw.
+В поле ввода вставить информацию, по форме:
+
+    id: int
+    url: str
+    region: str
+    region_url: str
+    price: int
+    year: float
+    manufacturer: str
+    model: str
+    fuel: str
+    odometer: float
+    title_status: str
+    transmission: str
+    image_url: str
+    description: str
+    state: str
+    lat: float
+    long: float
+    posting_date: str
+
+Нажать SEND, получить результат.
+Примеры JSON-объектов, с которыми работает метод - смотри файлы в директории request_examples/
+
+
+
